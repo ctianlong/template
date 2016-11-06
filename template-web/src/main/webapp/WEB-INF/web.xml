@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>template-web</display-name>
   <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>/login.jsp</welcome-file>
   </welcome-file-list>
   
   <!-- 加载log4j配置 -->  
@@ -63,5 +63,30 @@
 		<servlet-name>springMVC</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
+	
+	<filter>
+	    <filter-name>druidWebStat</filter-name>
+	    <filter-class>com.alibaba.druid.support.http.WebStatFilter</filter-class>
+	    <init-param>
+	      <param-name>exclusions</param-name>
+	      <param-value>/resources/*,/css/*,/style/*,/jslib/*,*.js,*.css,/druid*,/attached/*,/uploadFile/*,*.jsp</param-value>
+	    </init-param>
+	    <init-param>
+	      <param-name>principalSessionName</param-name>
+	      <param-value>sessionInfo</param-value>
+	    </init-param>
+	 </filter>
+	 <filter-mapping>
+	    <filter-name>druidWebStat</filter-name>
+	    <url-pattern>/*</url-pattern>
+	 </filter-mapping>
+	  <servlet>
+	    <servlet-name>druidStatView</servlet-name>
+	    <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	    <servlet-name>druidStatView</servlet-name>
+	    <url-pattern>/druid/*</url-pattern>
+	  </servlet-mapping>
   
 </web-app>

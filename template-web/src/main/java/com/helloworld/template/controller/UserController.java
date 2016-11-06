@@ -39,7 +39,7 @@ public class UserController {
 		if (resultUser == null) {
 			request.setAttribute("user", user);
 			request.setAttribute("errorMsg", "用户名或密码错误！");
-			return "index";
+			return "login";
 		} else {
 			HttpSession session = request.getSession();
 			session.setAttribute("currentUser", resultUser);
@@ -55,6 +55,6 @@ public class UserController {
 		userService.logout(user);
 		logger.info("退出登录：" + user.getUserName());
 		session.removeAttribute("currentUser");
-		return "index";
+		return "login";
 	}
 }
